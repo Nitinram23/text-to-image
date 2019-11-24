@@ -11,6 +11,9 @@ import random
 import json
 import os
 import shutil
+from PIL import Image
+import PIL
+import imageio
 
 def main():
 	parser = argparse.ArgumentParser()
@@ -75,8 +78,9 @@ def main():
 	gan = model.GAN(model_options)
 	input_tensors, variables, loss, outputs, checks = gan.build_model()
 	
-	d_optim = tf.train.AdamOptimizer(args.learning_rate, beta1 = args.beta1).minimize(loss['d_loss'], var_list=variables['d_vars'])
-	g_optim = tf.train.AdamOptimizer(args.learning_rate, beta1 = args.beta1).minimize(loss['g_loss'], var_list=variables['g_vars'])
+	with tf.variable_scope(tf.get_variable_scope(), reuse=tf.AUTO_REUSE):
+		d_optim = tf.train.AdamOptimizer(args.learning_rate, beta1 = args.beta1).minimize(loss['d_loss'], var_list=variables['d_vars'])
+		g_optim = tf.train.AdamOptimizer(args.learning_rate, beta1 = args.beta1).minimize(loss['g_loss'], var_list=variables['g_vars'])
 	
 	sess = tf.InteractiveSession()
 	tf.initialize_all_variables().run()
@@ -168,11 +172,13 @@ def save_for_vis(data_dir, real_images, generated_images, image_files):
 	for i in range(0, real_images.shape[0]):
 		real_image_255 = np.zeros( (64,64,3), dtype=np.uint8)
 		real_images_255 = (real_images[i,:,:,:])
-		scipy.misc.imsave( join(data_dir, 'samples/{}_{}.jpg'.format(i, image_files[i].split('/')[-1] )) , real_images_255)
+		#scipy.misc.imsave( join(data_dir, 'samples/{}_{}.jpg'.format(i, image_files[i].split('/')[-1] )) , real_images_255)
+		imageio.imwrite(join(data_dir, 'samples/{}_{}.jpg'.format(i, image_files[i].split('/')[-1] )) , real_images_255)
 
 		fake_image_255 = np.zeros( (64,64,3), dtype=np.uint8)
 		fake_images_255 = (generated_images[i,:,:,:])
-		scipy.misc.imsave(join(data_dir, 'samples/fake_image_{}.jpg'.format(i)), fake_images_255)
+		imageio.imwrite(join(data_dir, 'samples/fake_image_{}.jpg'.format(i)), fake_images_255)
+		#scipy.misc.imsave(join(data_dir, 'samples/fake_image_{}.jpg'.format(i)), fake_images_255)
 
 
 def get_training_batch(batch_no, batch_size, image_size, z_dim, 
