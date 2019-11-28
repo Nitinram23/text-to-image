@@ -10,6 +10,7 @@ import scipy.misc
 import random
 import json
 import os
+import imageio
 
 def main():
 	parser = argparse.ArgumentParser()
@@ -99,7 +100,7 @@ def main():
 			caption_images.append( im )
 			caption_images.append( np.zeros((64, 5, 3)) )
 		combined_image = np.concatenate( caption_images[0:-1], axis = 1 )
-		scipy.misc.imsave( join(args.data_dir, 'val_samples/combined_image_{}.jpg'.format(cn)) , combined_image)
+		imageio.imwrite( join(args.data_dir, 'val_samples/combined_image_{}.jpg'.format(cn)) , combined_image)
 
 
 if __name__ == '__main__':

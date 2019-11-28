@@ -7,6 +7,7 @@ import pickle
 import argparse
 import skipthoughts
 import h5py
+import pdb
 # DID NOT TRAIN IT ON MS COCO YET
 def save_caption_vectors_ms_coco(data_dir, split, batch_size):
 	meta_data = {}
@@ -80,6 +81,7 @@ def save_caption_vectors_flowers(data_dir):
 	for i, img in enumerate(image_captions):
 		st = time.time()
 		encoded_captions[img] = skipthoughts.encode(model, image_captions[img])
+		print(encoded_captions[img].shape)
 		print(i, len(image_captions), img)
 		print("Seconds", time.time() - st)
 		

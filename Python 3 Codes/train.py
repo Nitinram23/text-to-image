@@ -144,6 +144,7 @@ def load_training_data(data_dir, data_set):
 		h = h5py.File(join(data_dir, 'flower_tv.hdf5'))
 		flower_captions = {}
 		for ds in h.items():
+			print(ds)
 			flower_captions[ds[0]] = np.array(ds[1])
 		image_list = [key for key in flower_captions]
 		image_list.sort()
