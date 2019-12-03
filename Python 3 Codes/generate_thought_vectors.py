@@ -22,10 +22,13 @@ def main():
 	print(captions)
 	model = skipthoughts.load_model()
 	caption_vectors = skipthoughts.encode(model, captions)
+	# print(caption_vectors)
+	# print(type(caption_vectors))
+	# print(caption_vectors.shape)
 
-	if os.path.isfile(join(args.data_dir, 'sample_caption_vectors.hdf5')):
-		os.remove(join(args.data_dir, 'sample_caption_vectors.hdf5'))
-	h = h5py.File(join(args.data_dir, 'sample_caption_vectors.hdf5'))
+	if os.path.isfile(join(args.data_dir, 'submission_caption_vectors.hdf5')):
+		os.remove(join(args.data_dir, 'submission_caption_vectors.hdf5'))
+	h = h5py.File(join(args.data_dir, 'submission_caption_vectors.hdf5'))
 	h.create_dataset('vectors', data=caption_vectors)		
 	h.close()
 

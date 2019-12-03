@@ -33,22 +33,24 @@ def main():
 	parser.add_argument('--gfc_dim', type=int, default=1024,
 					   help='Dimension of gen untis for for fully connected layer 1024')
 
-	parser.add_argument('--caption_vector_length', type=int, default=2400,
+	parser.add_argument('--caption_vector_length', type=int, default=768,
 					   help='Caption Vector Length')
 	
 	parser.add_argument('--data_dir', type=str, default="Data",
 					   help='Data Directory')
 
-	parser.add_argument('--model_path', type=str, default='Data/Models/latest_model_flowers_temp.ckpt',
+	parser.add_argument('--model_path', type=str, default='Data/Models/latest_bert_model_flowers_temp.ckpt',
                        help='Trained Model Path')
 
 	parser.add_argument('--n_images', type=int, default=5,
                        help='Number of Images per Caption')
 
-	parser.add_argument('--caption_thought_vectors', type=str, default='Data/sample_caption_vectors.hdf5',
+	parser.add_argument('--caption_thought_vectors', type=str, default='Data/submission_bert_caption_vectors.hdf5',
                        help='Caption Thought Vector File')
 
 	
+	# conda install -c conda-forge tensorflow==1.15
+
 	args = parser.parse_args()
 	model_options = {
 		'z_dim' : args.z_dim,
