@@ -1,5 +1,5 @@
-# A report for this project can be found in the the 'Project_report.pdf' file.
-# Original readme from author found below
+A report for this project can be found in the the 'Project_report.pdf' file.
+Original readme from author found below
 # Text To Image Synthesis Using Thought Vectors
 
 [![Join the chat at https://gitter.im/text-to-image/Lobby](https://badges.gitter.im/text-to-image/Lobby.svg)](https://gitter.im/text-to-image/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
